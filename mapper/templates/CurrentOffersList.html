@@ -1,0 +1,29 @@
+{% extends 'Base.html' %}
+{% block title %}Current Offers{% endblock %}
+{% block table %}
+    <table class="table table-hover">
+        <thead style="d">
+            <th>#</th>
+            <th>Сервер</th>
+            <th>Пользователь</th>
+            <th>Айди</th>
+            <th>Цена</th>
+            <th>Количество</th>
+            <th>Последнее обновление</th>
+        </thead>
+    {% for offer_id in offers %}
+        <tr class="offer">
+            <td class="offer-index">{{ loop.index }}</td>
+            <td class="offer-server">{{ offers[offer_id].server }}</td>
+            <td class="offer-username">{{ offers[offer_id].user.name }}</td>
+            <td class="offer-id"><a href="/history/{{ offer_id }}">{{ offer_id }}</a></td>
+            <td class="offer-price">{{ offers[offer_id].price }}</td>
+            <td class="offer-quantity">{{ offers[offer_id].quantity }}</td>
+            <td class="offer-date">{{ offers[offer_id].date.strftime('%Y-%m-%d') }}</td>
+        </tr>
+    {% endfor %}
+    </table>
+{% endblock %}
+{% block scripts%}
+<script src="{{ url_for('static', filename='js/CurrentOffersList.js') }}"></script>
+{% endblock %}
